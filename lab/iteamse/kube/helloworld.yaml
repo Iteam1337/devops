@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: hello-world
+  name: hello-world
+spec:
+  replicas: 1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: hello-world
+    spec:
+      containers:
+      - image: crccheck/hello-world
+        name: hello-world
+        ports:
+        - containerPort: 8000
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world
+spec:
+  rules:
+  - host: testing.kube.iteam
+    http:
+      paths:
+      - backend:
+          serviceName: hello-world
+          servicePort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  labels:
+    io.kompose.service: hello-world
+spec:
+  ports:
+  - name: "8000"
+    port: 8000
+    targetPort: 8000
+  selector:
+    io.kompose.service: hello-world
+status:
+  loadBalancer: {}

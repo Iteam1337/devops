@@ -1,0 +1,51 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - image: crccheck/hello-world
+        name: hello-world
+        ports:
+        - containerPort: 8000
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world
+spec:
+  tls:
+  - hosts:
+    - hello-world.aws.iteamdev.se
+    secretName: letsencrypt-stage
+  rules:
+  - host: hello-world.aws.iteamdev.se
+    http:
+      paths:
+      - backend:
+          serviceName: hello-world
+          servicePort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  ports:
+  - name: "8000"
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: hello-world

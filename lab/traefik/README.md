@@ -23,7 +23,7 @@ This setup is intended for clusters where you use multiple worker nodes (more th
 
 ## Setup a Kubernetes cluster with Containership
 
-- [Add Amazon Web Services as a provider](https://docs.containership.io/en/articles/504594-how-to-add-amazon-web-services-as-a-provider) (This has already been configured)
+- [Add Amazon Web Services as a provider](https://docs.containership.io/en/articles/504594-how-to-add-amazon-web-services-as-a-provider)
 
 - [Launch cluster using AWS](https://docs.containership.io/en/articles/2241901-launch-cluster-using-amazon-web-services-aws)
 
@@ -104,7 +104,7 @@ kubectl -n kube-system delete pod $(kubectl -n kube-system get pod -l app=traefi
 - After you have deployed Traefik it is likely that your Load Balancer in AWS will not work.
 - Navigate to Load Balancers section inside EC2 and select your Load Balancer and then verify the `Instances` tab for the `Status` of your instances (you want to have `InService`)
 - `Edit Availability Zones` and make sure that the zones your instances belong to are added to `Selected subnets`
-- Then wait for a bit for the health checks to recognize that your instances are up and the Status should chane
+- Then wait for a bit for the health checks to recognize that your instances are up and the Status should change
 
 ### Route53 setup
 

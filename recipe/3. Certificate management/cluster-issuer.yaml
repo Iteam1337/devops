@@ -1,0 +1,22 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: register@iteam.se
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - dns01:
+          route53:
+            region: # Add your region here
+            accessKeyID: # Add your access key here
+            secretAccessKeySecretRef:
+              name: amazon-route53-credentials
+              key: AWS_SECRET_ACCESS_KEY
+        selector:
+          dnsNames:
+            - "*.devops.iteamdev.se" # Add your domain here

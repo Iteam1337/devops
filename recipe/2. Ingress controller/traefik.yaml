@@ -41,7 +41,7 @@ subjects:
     name: traefik
     namespace: kube-system
 ---
-kind: Deployment
+kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: traefik
@@ -49,7 +49,6 @@ metadata:
   labels:
     app: traefik
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: traefik

@@ -25,5 +25,5 @@ kubectl apply -f traefik.yaml
 - When applying config changes (aka making changes to the `ConfigMap` object) you want to redeploy traefik.
 
 ```bash
-kubectl -n kube-system rollout restart deployment traefik
+kubectl -n kube-system rollout restart daemonset traefik
 ```

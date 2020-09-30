@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: -.-hello-world
+build:
+  artifacts:
+    - image: iteam1337/hello-world-api
+      context: packages/api
+deploy:
+  kubectl:
+    manifests:
+      - k8s/api.yaml

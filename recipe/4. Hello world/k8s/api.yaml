@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: labb
+  labels:
+    app.kubernetes.io/name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: api
+    spec:
+      containers:
+        - name: api
+          image: iteam1337/hello-world-api
+          ports:
+            - containerPort: 8080
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: labb
+  labels:
+    app.kubernetes.io/name: api
+spec:
+  ports:
+    - port: 8080
+      name: http
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: api
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api
+  namespace: labb
+  labels:
+    app.kubernetes.io/name: api
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  tls:
+    - hosts:
+        - labb.iteamdev.io
+      secretName: labb-tls
+  rules:
+    - host: labb.iteamdev.io
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            backend:
+              serviceName: api
+              servicePort: http

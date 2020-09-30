@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: kustomize-lab
+build:
+  artifacts:
+    - image: iteam1337/kustomize-lab-api
+      context: packages/api
+deploy:
+  kubectl:
+    manifests:
+      - k8s/dev/ns.yaml
+      - k8s/dev/api.yaml
+    flags:
+      global:
+        - --namespace=kustomize-lab-dev
+  statusCheckDeadlineSeconds: 600
+profiles:
+  - name: prod
+    deploy:
+      kubectl:
+        manifests:
+          - k8s/prod/ns.yaml
+          - k8s/prod/api.yaml
+        flags:
+          global:
+            - --namespace=kustomize-lab-prod

@@ -21,7 +21,9 @@ spec:
             - containerPort: 4000
           env:
             - name: SERVER_ID
-              value: DEV-introduction-api-server
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: DATABASE_URL
               value: db://best-database:5012
             - name: ENABLE_LOGGING

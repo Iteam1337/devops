@@ -53,7 +53,7 @@ spec:
   tls:
     - hosts:
         - kustomize-lab-api.dev.iteamdev.io
-      secretName: api-prod-tls
+      secretName: api-tls
   rules:
     - host: kustomize-lab-api.dev.iteamdev.io
       http:

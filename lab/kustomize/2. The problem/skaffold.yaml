@@ -9,7 +9,6 @@ build:
 deploy:
   kubectl:
     manifests:
-      - k8s/dev/ns.yaml
       - k8s/dev/api.yaml
     flags:
       global:
@@ -20,7 +19,6 @@ profiles:
     deploy:
       kubectl:
         manifests:
-          - k8s/prod/ns.yaml
           - k8s/prod/api.yaml
         flags:
           global:

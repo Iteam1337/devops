@@ -28,6 +28,7 @@ spec:
               value: db://best-database:5012
             - name: ENABLE_LOGGING
               value: "false"
+          resources: {}
 ---
 apiVersion: v1
 kind: Service

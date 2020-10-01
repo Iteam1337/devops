@@ -7,9 +7,12 @@ build:
     - image: iteam1337/kustomize-lab-api
       context: packages/api
 deploy:
-  kubectl:
-    manifests:
-      - k8s/api.yaml
-    flags:
-      global:
-        - --namespace=kustomize-lab-dev
+  kustomize:
+    paths:
+      - k8s/base
+profiles:
+  - name: prod
+    deploy:
+      kustomize:
+        paths:
+          - k8s/overlay/prod

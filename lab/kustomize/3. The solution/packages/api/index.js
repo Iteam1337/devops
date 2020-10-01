@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
-const { port } = config
+const { port, logging } = config
 
-app.get('/', (_, res) => {
+app.get('/', (req, res) => {
+  if (logging) {
+    console.debug(`new request from ${req.ip}`)
+  }
   res.send({ ...config, date: new Date() })
 })
 app.listen(port, () => {

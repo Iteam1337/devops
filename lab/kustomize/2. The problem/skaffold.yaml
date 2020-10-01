@@ -13,7 +13,6 @@ deploy:
     flags:
       global:
         - --namespace=kustomize-lab-dev
-  statusCheckDeadlineSeconds: 600
 profiles:
   - name: prod
     deploy:

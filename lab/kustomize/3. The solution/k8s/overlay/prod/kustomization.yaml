@@ -1,0 +1,17 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+patchesStrategicMerge:
+  - api.yaml
+
+# namespace to deploy all Resources to
+namespace: kustomize-lab-prod
+
+configMapGenerator:
+  - name: api-properties
+    behavior: merge
+    env: api.properties

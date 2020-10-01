@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: kustomize-lab
+build:
+  artifacts:
+    - image: iteam1337/kustomize-lab-api
+      context: packages/api
+deploy:
+  kustomize:
+    paths:
+      - k8s/base
+profiles:
+  - name: prod
+    deploy:
+      kustomize:
+        paths:
+          - k8s/overlay/prod

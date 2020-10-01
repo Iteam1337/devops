@@ -40,7 +40,7 @@ spec:
   selector:
     app: api
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: api
@@ -52,12 +52,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - kustomize-lab-api.dev.iteamdev.io
+        - kustomize-lab-api-dev.iteamdev.io
       secretName: api-tls
   rules:
-    - host: kustomize-lab-api.dev.iteamdev.io
+    - host: kustomize-lab-api-dev.iteamdev.io
       http:
         paths:
-          - backend:
-              serviceName: api
-              servicePort: 4000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api
+                port:
+                  number: 4000

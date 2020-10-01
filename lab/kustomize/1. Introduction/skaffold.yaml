@@ -9,9 +9,8 @@ build:
 deploy:
   kubectl:
     manifests:
-      - k8s/ns.yaml
       - k8s/api.yaml
     flags:
       global:
-        - --namespace=kustomize-lab
+        - --namespace=kustomize-lab-dev
   statusCheckDeadlineSeconds: 600

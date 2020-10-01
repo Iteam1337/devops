@@ -27,7 +27,8 @@ spec:
                   fieldPath: metadata.name
             - name: DATABASE_URL
               value: db://best-database:5012
-          resources: {}
+            - name: ENABLE_LOGGING
+              value: "true"
 ---
 apiVersion: v1
 kind: Service

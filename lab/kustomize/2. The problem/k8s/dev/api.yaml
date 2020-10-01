@@ -24,6 +24,8 @@ spec:
               value: DEV-introduction-api-server
             - name: DATABASE_URL
               value: db://best-database:5012
+            - name: ENABLE_LOGGING
+              value: "false"
 ---
 apiVersion: v1
 kind: Service

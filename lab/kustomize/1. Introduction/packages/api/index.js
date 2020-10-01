@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
   res.send({ ...config, date: new Date() })
 })
 app.listen(port, () => {
-  console.log(`server listening on ${port}`)
+  console.log(`server started and listening on ${port}`)
 })
